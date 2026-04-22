@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Downloader</title>
+    <style>
+        body { font-family: sans-serif; background: #121212; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #1e1e1e; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 100%; max-width: 400px; text-align: center; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border-radius: 8px; border: none; background: #333; color: white; box-sizing: border-box; }
+        .btns { display: flex; gap: 10px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-mp3 { background: #00e676; color: #000; }
+        .btn-mp4 { background: #2979ff; color: #fff; }
+        button:hover { opacity: 0.8; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Downloader</h2>
+        <input type="text" id="url" placeholder="Pega el link aquí...">
+        <div class="btns">
+            <button class="btn-mp3" onclick="startDownload('audio')">MP3 (Audio)</button>
+            <button class="btn-mp4" onclick="startDownload('video')">MP4 (Video)</button>
+        </div>
+        <p id="msg" style="font-size: 12px; margin-top: 15px; color: #888;"></p>
+    </div>
+
+    <script>
+        function startDownload(tipo) {
+            const url = document.getElementById('url').value;
+            if (!url) return alert("Pega un link primero");
+            document.getElementById('msg').innerText = "Abriendo enlace de descarga...";
+            // Redirige a la ruta de Flask
+            window.location.href = `/descargar?tipo=${tipo}&url=${encodeURIComponent(url)}`;
+        }
+    </script>
+</body>
+</html>
